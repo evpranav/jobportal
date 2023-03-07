@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="post" >{% csrf_token %}
+
+   {% for i in employee %}
+      <h5>{{i.username}}</h5>
+      <h5>{{i.email}}</h5>
+      <h5>{{i.phoneno}}</h5>
+      <h5>{{i.qualification}}</h5>
+        <a href="http://127.0.0.1:8000/jobapp/edit/{{i.id}}">Edit</a>
+  {% endfor %}
+</form>
+</body>
+</html>

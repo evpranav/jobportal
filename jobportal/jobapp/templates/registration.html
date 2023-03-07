@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+            crossorigin="anonymous"></script>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Demo CSS (No need to include it into your project) -->
+<!--    <link rel="stylesheet" href="css/demo.css">-->
+    <style>
+
+:root{
+    --succes-color: #2ecc71;;
+    --error-color: #e74c3c;
+}
+.container{
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    width: 400px;
+    margin: 10px auto;
+}
+
+h2{
+    text-align: center;
+    margin: 0 0 20px;
+}
+
+.form{
+    padding: 30px 40px;
+}
+
+.form-control{
+    margin-bottom: 10px;
+    padding-bottom: 20px;
+    position: relative;
+}
+
+.form-control label{
+    color:#777;
+    display: block;
+    margin-bottom: 5px; 
+}
+ 
+.form-control input
+{
+    border: 2px solid #f0f0f0;
+    border-radius: 4px;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;   
+}
+
+.form-control input:focus{
+    outline: 0;
+    border-color: #777;
+
+}
+
+.form-control.success input {
+    border-color: var(--succes-color);
+}
+
+.form-control.error input {
+    border-color: var(--error-color);    
+}
+
+.form-control small{
+    color: var(--error-color);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    visibility: hidden;
+}
+
+.form-control.error small{
+    visibility: visible;
+}
+.form button {
+    cursor: pointer;
+    background-color: #3498db;
+    border: 2px solid #3498db;
+    border-radius: 4px;
+    color: #fff;
+    display: block;
+    padding: 10px;
+    font-size: 16px;
+    margin-top:20px;
+    width:100%;
+}
+    </style>
+</head>
+<body>
+
+<form id="form" class="form" method="post">{% csrf_token %}
+    <div class="container-fluid p-0">
+        <nav class="navbar navbar-expand-lg bg-white navbar-primary py-3 py-lg-0 px-lg-5">
+            <a href="http://127.0.0.1:8000/jobapp/index/" class="navbar-brand ml-lg-3">
+                <h1 class="m-0 text-uppercase text-primary"><i class="fa fa-book-reader mr-3"></i>Job Portal</h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
+                <div class="navbar-nav mx-auto py-0">
+                    <a href="http://127.0.0.1:8000/jobapp/index/" class="nav-item nav-link active">Home</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Registration</a>
+                        <div class="dropdown-menu m-0">
+                            <a href="http://127.0.0.1:8000/jobapp/registration/" class="dropdown-item">Company</a>
+                            <a href="http://127.0.0.1:8000/jobapp/user_reg/" class="dropdown-item">User</a>
+                        </div>
+                    </div>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Login</a>
+                        <div class="dropdown-menu m-0">
+                            <a href="http://127.0.0.1:8000/jobapp/login/" class="dropdown-item">Company</a>
+                            <a href="http://127.0.0.1:8000/jobapp/user_log/" class="dropdown-item">User</a>
+                        </div>
+                    </div>
+<!--                    <a href="{% static 'contact.html' %}" class="nav-item nav-link">Contact</a>-->
+                </div>
+<!--                <a href="" class="btn btn-primary py-2 px-4 d-none d-lg-block">Join Us</a>-->
+            </div>
+        </nav>
+    </div>
+    <div class="container">
+
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-info">
+            {{ message }}
+        </div>
+        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}></li>
+        {% endfor %}
+        {% endif %}
+
+        <h2>Register With Us</h2>
+        <div class="form-control">
+            <label>Username</label>
+            <input type="text" name="username" placeholder="Enter Username">
+        </div>
+        <div class="form-control">
+            <label>Email</label>
+            <input type="email" name="email" placeholder="Enter email">
+        </div>
+        <div class="form-control">
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Enter password">
+        </div>
+<!--        <div class="form-control">-->
+<!--            <label>Confirm Password</label>-->
+<!--            <input type="password"  name="cspassword" placeholder="Enter password again">-->
+<!--        </div>-->
+        <input type="submit" value="Register">
+        <a href="http://127.0.0.1:8000/jobapp/login">Sign In</a>
+    </div>
+    {% include 'footer.html' %}
+</form>
+</body>
+</html>
